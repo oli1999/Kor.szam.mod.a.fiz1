@@ -7,7 +7,7 @@ using namespace std;
 // template azt csinálja hogy bármilyen 
 template<typename F> F fgv(F x){return x*x;} // ez a fgv
 template<typename D> D fgv_d(D x){return 2*x;} // ez a fgv deriváltja
-template<typename V, typename S> N newton_method(N x,N x2, N epsilon ,S f1 , S f2);
+template<typename V, typename S> V newton_method(V x,V x2, V epsilon ,S f1 , S f2);
 
 int main() 
 {
@@ -18,7 +18,7 @@ int main()
     return 0;
 }
 
-template<typename N> N newton_method(N x,N x2, N epsilon ,S f1 ,S f2) 
+template<typename V , typename S> V newton_method(V x,V x2, V epsilon ,S f1 ,S f2) 
 {
     dif = fgv(x) / fgv_d(x);                      // ez a sor azért kell h while el tudja kezdeni az összehasonlítást
     while (abs(dif) >= epsilon)                   //epsilon mondja meg mikor vagyunk elég közel már zérushelyhez
