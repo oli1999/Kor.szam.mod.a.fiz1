@@ -8,3 +8,4 @@ fgsfg
 
 
 #valami valtozas
+# elkezdtem dokumentalni a dolgokat
