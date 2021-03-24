@@ -1,24 +1,3 @@
-// KÉRDÉSEK
-
-// 1. Külön headerbe készítsük el?
-// Válasz: vector.h külön fájl, az egész osztály berakva oda # include "vector.h" hívom meg
-// 2. Ennyi elég?
-// double type a skalárral való szorzás, 
-// 3. Amikor a szorzás operátort definiálom jobbról,balról akkor az "operator*" kifejezést nem tudom többször használni.
-//              Bármilyen nevet adhatok az operátornak? Vagy muszály úgy kezdődnie, hogy "operator" és utána valami más szót is írhatok.
-//              Például "operator*_left" a másik "operator*_right"
-// 4. Struct tamplate-nél mindegy hány műv. def. a struct-ba eleég egy template?
-// Válasz: igen
-// 5. Lehet ugyanazt a nevet adni a fgv.-nek úgy,hogy mást definiálunk rajta?
-// Válasz: Igen, itt nem igaz a C-beni szabály, hogy mindegyik műveletnek más nevet kell adni, csak az argumentumnak kell másnak lennie és lehet ugyanaz a név.
-
-
-
-// összeadás, értékadásösszeadás, skalárral való szorzás, kivonás, vektorok skaláris szorzata, normalizáció, vektorok hossza
-// vektorok skaláris szorzása ne legyen operator* jel, skalárral való szorzás legyen operator*
-#include <iostream>
-using namespace std;
-
 template <typename T>
 struct Vector2d // definition of a struct, attention! it's not a class
 {
@@ -32,18 +11,26 @@ struct Vector2d // definition of a struct, attention! it's not a class
         x += v.x; y += v.y;
         return *this; // return value points at the original objects
     }
-    // multiplication with scalar v's left side
-    Vector2d<T>& operator*= (Vector2d<T> const& v , const double alfa) //this is dif. from * op. 'cause, this is not just a multiplication but also value giving at the same time
+    // multiplication a's right side
+    Vector2d<T>& operator*= (Vector2d<T> const& v , double alfa) //this is dif. from * op. 'cause, this is not just a multiplication but also value giving at the same time
                                         // that's why we have to initialize it inside the structure
     {
         x = alfa * v.x ; y = alfa * v.y;
         return *this; // return value points at the original objects
     }
-    // multiplication with scalar v's right side
+    // multiplication a's left side
     Vector2d<T>& operator*= (Vector2d<T> const& v) //this is dif. from * op. 'cause, this is not just a multiplication but also value giving at the same time
                                         // that's why we have to initialize it inside the structure
     {
-        x = v.x * alfa ; y = v.y * alfa;
+        x *= v.x ; y *= v.y;
+        return *this; // return value points at the original objects
+    }
+
+    // substraction and value giving
+    Vector2d<T>& operator-= (Vector2d<T> const& v) //this is dif. from * op. 'cause, this is not just a multiplication but also value giving at the same time
+                                        // that's why we have to initialize it inside the structure
+    {
+        // magic happens here
         return *this; // return value points at the original objects
     }
 };
@@ -71,28 +58,25 @@ Vector2d<MM> operator* (Vector2d<MM> const& a, Vector2d<MM> const& b)
 };
 
 template <typename SM>      // multiplication with scalar
-Vector2d<SM> operator* (Vector2d<SM> const& a , Vector2d<SM> double alfa)
+Vector2d<SM> operator* (Vector2d<SM> const& a , Vector2d<SM> const& alfa)
 {
     return Vector2d<SM>{alfa * a.x , alfa * a.y}; // It gives back vectors 2 comp. multi. with the same scalar
 };
 
-
-
-
-
-
-
-
-
-int main() 
+template <typename SU>      // substraction
+Vector2d<SU> operator- (Vector2d<SU> const& a , Vector2d<SU> const& b)
 {
-    Vector2d<double> v = {17.0 , 2.0}; // def. and value giving
-    Vector2d<double> u = {4.0 , -2.0}; // def. and value giving
-    auto w = v * u;                     
-    std::cout << v.x << " " << v.y << endl;
-    std::cout << u.x << " " << u.y << endl;
-    std::cout << w.x << " " << w.y << endl;
-    auto p = u * v;
-    std::cout << p.x << " " << p.y << endl;
-    return 0;
-}
+    return Vector2d<SU>{ a.x - b.x ,  a.y - b.y}; 
+};
+
+template <typename NO>      // normalization
+Vector2d<>  (Vector2d<> const& a , Vector2d<> const& b)
+{
+    return Vector2d<>{}; 
+};
+
+template <typename LE>      // length
+Vector2d<>  (Vector2d<> const& a , Vector2d<> const& b)
+{
+    return Vector2d<>{}; 
+};
