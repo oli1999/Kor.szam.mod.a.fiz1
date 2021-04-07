@@ -11,6 +11,13 @@ struct Vector2d                                                             // d
         return *this;                                                       // return value points at the original objects
     }
 
+    // substraction and value giving
+    Vector2d<T>& operator-= (Vector2d<T> const& v)                          //this is dif. from - op. 'cause ,this is not just a substraction but also value giving at the same time
+                                                                            // that's why we have to initialize it inside the structure
+    {
+        x -= v.x; y -= v.y;
+        return *this;                                                       // return value points at the original objects
+    }
     
 };
 
@@ -31,26 +38,23 @@ Vector2d<SS> operator- (Vector2d<SS> const& a, Vector2d<SS> const& b)          /
 };
 
 
-//multiplication
-template <typename M>   
-Vector2d<M> operator* (Vector2d<M> const& a, Vector2d<M> const& b) 
+//dot product
+template <typename DM>   
+Vector2d<DM> ˙ (Vector2d<DM> const& a, Vector2d<DM> const& b) 
 {
-    return Vector2d<M>{a.x * b.x , a.y * b.y};                                          // this mult. the 2 vector's x and y comp. with eachother
+    return a.x * b.x + a.y * b.y;                                          // this mult. the 2 vector's x and y comp. with eachother
 };
 
-// multiplication2
-//template <typename MM>      
-//Vector2d<MM> operator* (Vector2d<MM> const& a, Vector2d<MM> const& b)
-//{
-//    return Vector2d<MM>{b.x * a.x , b.y * a.y};
-//};
+
 
 // multiplication with scalar
-//template <typename SM>      
-//Vector2d<SM> operator* (Vector2d<SM> const& a , const double alfa)
-//{
-//    return Vector2d<SM>{alfa * a.x , alfa * a.y};                               // It gives back vectors 2 comp. multi. with the same scalar
-//};
+template <typename SM>      
+Vector2d<SM> operator* (Vector2d<SM> const& a , const double alfa)
+{
+    return Vector2d<SM>{alfa * a.x , alfa * a.y};                               // It gives back vectors 2 comp. multi. with the same scalar
+};
+
+
 
 //length
 template <typename L>   

@@ -26,23 +26,31 @@ int main()
 {
     Vector2d<double> v = {17.0 , 2.0};                                                // def. and value giving
     Vector2d<double> u = {4.0 , -2.0};                                                // def. and value giving
-    std::cout << v.x << " " << v.y << endl;                                         
-    std::cout << u.x << " " << u.y << endl;                                         
+    std::cout << "v vector: " << v.x << " " << v.y << endl;                                         
+    std::cout << "u vector: "<< u.x << " " << u.y << endl;                                         
     auto q = v + u;
-    std::cout << q.x << " " << q.y << endl;                                          
+    std::cout << "q vector: "<< q.x << " " << q.y << endl;                                          
     auto r = u + v;
-    std::cout << r.x << " " << r.y << endl;                                         
+    std::cout << "r vector: "<< r.x << " " << r.y << endl;                                         
     v += u;
-    std::cout << v.x << " " << v.y << endl;                                             
-    std::cout << u.x << " " << u.y << endl;                                               
+    std::cout << "v vector: "<< v.x << " " << v.y << endl;                                             
+    std::cout << "u vector: "<< u.x << " " << u.y << endl;                                               
     Vector2d<double> v2 = {17.0 , 2.0};                                                // def. and value giving
     Vector2d<double> u2 = {4.0 , 2.0};                                                // def. and value giving
-    auto w = v2 * u2;                     
-    std::cout << w.x << " " << w.y << endl;                                             
+    std::cout << "v2 vector: "<< v2.x << " " << v2.y << endl;                                             
+    std::cout << "u2 vector: "<< u2.x << " " << u2.y << endl; 
+    v2 -= u2;
+    std::cout << "v2 vector: "<< v2.x << " " << v2.y << endl;                                             
+    std::cout << "u2 vector: "<< u2.x << " " << u2.y << endl;                                             
+    //auto w = v2 * u2;                     
+    //std::cout << "w vector: "<< w.x << " " << w.y << endl;                                             
+    double constans = 5.0;
+    auto c_u2 = constans * u2;
+    std::cout << "c_u2 vector: "<< c_u2.x << " " << c_u2.y << endl;
     auto k = length_of_vec(u2);
-    std::cout << k.x << " " << k.y << endl;                                         // I'm not sure, this is the task, but it's workin'
+    std::cout << "k vector: "<< k.x << " " << k.y << endl;                                         // I'm not sure, this is the task, but it's workin'
     auto ww = v2 - u2;                                                               
-    std::cout << ww.x << " " << ww.y << endl; 
+    std::cout << "ww vector: "<< ww.x << " " << ww.y << endl; 
 
     return 0;
 }
