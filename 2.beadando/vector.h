@@ -73,8 +73,8 @@ Vector2d<L> length_of_vec (Vector2d<L> const& a)
 };
 
 //cin
-template <typename CIN>   
-Vector2d<CIN> vec_cin (Vector2d<CIN> const& a)                                
-{
-    return Vector2d<CIN> cin << a.x << a.y ;                            // add the vectors 2 comp. square, and after that it takes the square root of the sum
-};
+//template <typename CIN>   
+//Vector2d<CIN> vec_cin (Vector2d<CIN> const& a)                                
+//{
+//    return Vector2d<CIN> cin << a.x << a.y ;                            // add the vectors 2 comp. square, and after that it takes the square root of the sum
+//};

@@ -2,22 +2,16 @@
 
 using namespace std;
 
-struct Matrix2 
-{
-
-    double a11, a12, a21, a22;
-
-
-};
-
+// csináljunk egy osztályt, aminek az egyes függvényei az integrálás meg deriválás
+// pontosabban  - ívhossz szerinti integrál
+//              - Richardson-extrapoláció , O(h^6) rendű közelítés
+//              - középpontos-módszer
+//              - trapéz-módszer
+//              - 1/3 Simpson szabály , 1% pontosság
 
 
 
 int main() 
 {
-Matrix2 m;
-Matrix2 m2 = (1.0, 2.0, 3.0, 4.0);
-Matrix2 m3 = (21.0, 2.0, 3.0, 4.0);
 
 }
-124234 
