@@ -1,6 +1,7 @@
-#include <iostream>
-#include <arc_length.h>
-using namespace std;
+//#include <iostream>
+//#include <arc_length.h>
+//using namespace std;
+//#include <cmath>
 
 // csináljunk egy osztályt, aminek az egyes függvényei az integrálás meg deriválás
 // pontosabban  - ívhossz szerinti integrál
@@ -11,77 +12,53 @@ using namespace std;
 
 
 
-int main() 
-{
+// AZ ÍVHOSSZ SZERINTI INTEGRÁL: integrate(a,b)  (1 + f'^2)^(1/2)  ds
 
+template <typename T>
+double Richardson_ex(int x, double dx, T f, const int F, const double q, const int a, const int h)
+{
+    return (5*f(x + 4*dx , ) - 200*f(x + 2*dx) + 1280*f(x + dx) - 1280*f(x - dx) + 200*f(x - 2*dx) -5*f(x - 4*dx));
 }
 
 
-
-
-#include <iostream>
-#include <cmath>
-#include <iomanip>		// Needed too manipulate the display
-using namespace std;
-
-
-
-// the function
-long double f(long double x)
+double Newton_Cotes(T f, double dx, const int n)
 {
-    long double f;
-    f=sin(x);
-    return f;
-}
-
-
-
-// The Derivative function
-void Derivative(long double x, int n, long double h, long double D[10][10])
-{
-    int i, j;
-    for (i=0; i<n; i++)
+    double M;
+    for (int i = 0; i < n; i++)
     {
-        D[i][0]=(f(x+h)-f(x-h))/(2*h);
-        for (j=0; j<=(i-1); j++)
-        {
-            D[i][j+1]=D[i][j]+(D[i][j]-D[i-1][j])/(pow(4.0,double(j+1))-1);
-        }
-        h=h/2;
+        M += f(m[i]) * dx;
     }
+    
 }
 
-
-
-int main(int argc, char *argv[])
-
+double trapezoidal(T f, double dx, const int n)
 {
-    long double D[10][10];
-    int n=10, digits=5;
-    long double h=1, x=0;
-
-    Derivative(x, n, h, D);
-
-    // Set a fixed amount of digits to show
-    cout.setf(ios::fixed );
-    cout.setf(ios::showpoint);
-    cout <<  setprecision(digits) << endl;
-
-    // Printout the diagram
-    for(int i=0; i<n; i++)
-    {
-        for(int j=0;j<i+1;j++)
-        {
-            cout << setw(digits+2) << D[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    // Unset the fixed point
-
-    cout.unsetf(ios::fixed);
-    cout.unsetf(ios::showpoint);
-    system("PAUSE");
-    return 0;
-
+    // ugyanaz mint a Newton_Cotes csak le kell vonni f(x0) / 2 és f(xn) / 2 a végén
 }
+
+
+
+double func (double x , const int F , const double q , const int a , const int h)
+{
+    return ((F/q) * (cosh((q*x)/F) - cosh((q*a)/(2*F)) + h);
+}
+
+double middle ( int x, int x1, const int n ) // itt az x kezdőérték szerepébe bújik, onnan számolva 
+{
+    double m[n];
+    for (int i = 0; i < n + 1; i++)
+    {
+        double something;
+        something = [(x - x1) / 2] + i*(x - x1) ;
+        m.push_back(something)
+    }
+    return m;
+}
+
+
+
+
+
+
+
+
