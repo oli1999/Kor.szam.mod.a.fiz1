@@ -1,7 +1,8 @@
 #include <iostream>
-//#include <arc_length.h>
-using namespace std;
 #include <cmath>
+
+using namespace std;
+
 
 // csináljunk egy osztályt, aminek az egyes függvényei az integrálás meg deriválás
 // pontosabban  - ívhossz szerinti integrál
@@ -16,21 +17,23 @@ using namespace std;
 
 
 
+
+
 //HÁZIBAN MEGADOTT FGV
-double func (double x , const int F , const double q , const int a , const int h)
+double func (double x , const int F , const double q , const int a , const int h) //itt már használom h-t mint földtől mért távolság
 {
-    return ((F/q) * (cosh((q*x)/F) - cosh((q*a)/(2*F)) + h);
+    return ((F/q) * (cosh((q*x)/F)) - cosh((q*a)/(2*F)) + h);
 }
 
 //INTEGRÁLOKHOZ KELL EGYENLŐ LÉPÉSKÖZ
-double middle ( int x, int x1, const int n ) // itt az x kezdőérték szerepébe bújik, onnan számolva 
+double middle ( int x, int x1,int n) // itt az x kezdőérték szerepébe bújik, onnan számolva 
 {
-    double m[n];
+    double m[1];
     for (int i = 0; i < n + 1; i++)
     {
-        double something;
-        something = [(x - x1) / 2] + i*(x - x1) ;
-        m.push_back(something);
+        double something; // ideiglenes vált. eltárolt számolás
+        something = [(x - x1) / 2] + i*(x - x1) ; //
+        m.push_back(something);     // hozzáfűz egy elemet a lista végéhez
     }
     return m;
 }
@@ -38,13 +41,17 @@ double middle ( int x, int x1, const int n ) // itt az x kezdőérték szerepéb
 
 //RICHARDSON EXTRAPOLÁCIÓ 6. RENDŰ KÖZELÍTÉS
 template <typename T>
-double Richardson_ex(int x, double dx, T f, const int F, const double q, const int a, const int h)
+double Richardson_ex(int x, double dx, T f)
 {
-    return (5*f(x + 4*dx , ) - 200*f(x + 2*dx) + 1280*f(x + dx) - 1280*f(x - dx) + 200*f(x - 2*dx) -5*f(x - 4*dx));
+    double ff;
+    ff = (5*f(x + 4*dx , ) - 200*f(x + 2*dx) + 1280*f(x + dx) - 1280*f(x - dx) + 200*f(x - 2*dx) -5*f(x - 4*dx));
+    return ff;
 }
 
+//IDE JÖHET MAJD AZ ÍVHOSSZ INTEGRÁL
+
 // NEWTON-COTES FORMULA
-double Newton_Cotes(T f, int m, const int n)
+double Newton_Cotes(T f, int m, int n)
 {
     double M;
     double step = [m[1] - m[0]];
@@ -65,7 +72,7 @@ double trapezoidal(T f, int m, const int n)
     {
         MM += f(m[i]) * step;
     }
-    MM = MM - [f(m[0]) / 2] - [f(m[n]) / 2];
+    MM = MM - [f(m[0]) / 2] - [f(m[n-1]) / 2];
     return MM;
 }
 
