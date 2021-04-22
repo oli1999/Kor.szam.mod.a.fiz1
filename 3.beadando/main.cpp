@@ -1,38 +1,25 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
 
-// csináljunk egy osztályt, aminek az egyes függvényei az integrálás meg deriválás
-// pontosabban  - ívhossz szerinti integrál
-//              - Richardson-extrapoláció , O(h^6) rendű közelítés
-//              - középpontos-módszer
-//              - trapéz-módszer
-//              - 1/3 Simpson szabály , 1% pontosság
-
-
-
-// AZ ÍVHOSSZ SZERINTI INTEGRÁL: integrate(a,b)  (1 + f'^2)^(1/2)  ds
-
-
-
-
 
 //HÁZIBAN MEGADOTT FGV
-double func (double x , const int F , const double q , const int a , const int h) //itt már használom h-t mint földtől mért távolság
+double func (double x , int F , double q , int a , int h) //itt már használom h-t mint földtől mért távolság
 {
     return ((F/q) * (cosh((q*x)/F)) - cosh((q*a)/(2*F)) + h);
 }
 
 //INTEGRÁLOKHOZ KELL EGYENLŐ LÉPÉSKÖZ
-double middle ( int x, int x1,int n) // itt az x kezdőérték szerepébe bújik, onnan számolva 
+std::vector<double> middle ( double x, double x1,int n) // itt az x kezdőérték szerepébe bújik, onnan számolva , n mennyire sűrűen
 {
-    double m[1];
-    for (int i = 0; i < n + 1; i++)
+    std::vector<double> m;
+    for (int i = 0; i < n; i++)
     {
         double something; // ideiglenes vált. eltárolt számolás
-        something = [(x - x1) / 2] + i*(x - x1) ; //
+        something = ((x1 - x) / 2) + i*(x1 - x) ; //
         m.push_back(something);     // hozzáfűz egy elemet a lista végéhez
     }
     return m;
@@ -41,38 +28,44 @@ double middle ( int x, int x1,int n) // itt az x kezdőérték szerepébe bújik
 
 //RICHARDSON EXTRAPOLÁCIÓ 6. RENDŰ KÖZELÍTÉS
 template <typename T>
-double Richardson_ex(int x, double dx, T f)
+double Richardson_ex(double x, double dx, T f,  int F , double q , int a , int h)
 {
-    double ff;
-    ff = (5*f(x + 4*dx , ) - 200*f(x + 2*dx) + 1280*f(x + dx) - 1280*f(x - dx) + 200*f(x - 2*dx) -5*f(x - 4*dx));
-    return ff;
+    return (5*f(x + 4*dx , F , q , a , h ) - 200*f(x + 2*dx , F , q , a , h) + 1280*f(x + dx , F , q , a , h) - 1280*f(x - dx , F , q , a , h) + 200*f(x - 2*dx , F , q , a , h) -5*f(x - 4*dx , F , q , a , h) / (8 * dx));
 }
 
-//IDE JÖHET MAJD AZ ÍVHOSSZ INTEGRÁL
+
 
 // NEWTON-COTES FORMULA
-double Newton_Cotes(T f, int m, int n)
+double Newton_Cotes( std::vector<double> m, int n) // f - lesz ívhossz,
 {
-    double M;
-    double step = [m[1] - m[0]];
+    double M = 0;
+    double step = (m[1] - m[0]); // mindig állandó
     for (int i = 0; i < n; i++)
     {
-        M += f(m[i]) * step;
+        M += sqrt((1 + pow(Richardson_ex(m[i] , step , func , 900 , 1.8 , 200 , 35), 2))) * step;
     }
     return M;
 }
 
 //TRAPÉZOS GÖRBE ALATTI TERÜLET
-double trapezoidal(T f, int m, const int n)
+double trapezoidal( double start, double step, int n) // ugyanaz mint a Newton_Cotes csak le kell vonni f(x0) / 2 és f(xn) / 2 a végén
 {
-    // ugyanaz mint a Newton_Cotes csak le kell vonni f(x0) / 2 és f(xn) / 2 a végén
-    double MM;
-    double step = [m[1] - m[0]];
+    double MM = 0;
     for (int i = 0; i < n; i++)
     {
-        MM += f(m[i]) * step;
+        MM += sqrt((1 + pow(Richardson_ex(start + step*i , step , func , 900 , 1.8 , 200 , 35),2))) * step;
     }
-    MM = MM - [f(m[0]) / 2] - [f(m[n-1]) / 2];
+    MM = MM - ( sqrt((1 + pow(Richardson_ex(start , step , func , 900 , 1.8 , 200 , 35),2))) * step/ 2) - (sqrt((1 + pow(Richardson_ex(start + step*(n-1) , step , func , 900 , 1.8 , 200 , 35),2))) * step / 2);
     return MM;
 }
 
+
+int main()
+{
+    
+    
+    std::cout << Newton_Cotes(middle(-100, -99.9 , 2000) , 2000) << endl;
+    std::cout << trapezoidal(-100 , 1 , 200) << endl;
+
+    return 0;
+}
