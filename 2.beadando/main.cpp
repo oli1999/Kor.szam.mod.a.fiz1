@@ -1,20 +1,3 @@
-// KÉRDÉSEK
-
-// 1. Külön headerbe készítsük el?
-// Válasz: vector.h külön fájl, az egész osztály berakva oda # include "vector.h" hívom meg
-// 2. Ennyi elég?
-// double type a skalárral való szorzás, 
-// 3. Amikor a szorzás operátort definiálom jobbról,balról akkor az "operator*" kifejezést nem tudom többször használni.
-//              Bármilyen nevet adhatok az operátornak? Vagy muszály úgy kezdődnie, hogy "operator" és utána valami más szót is írhatok.
-//              Például "operator*_left" a másik "operator*_right"
-// 4. Struct tamplate-nél mindegy hány műv. def. a struct-ba eleég egy template?
-// Válasz: igen
-// 5. Lehet ugyanazt a nevet adni a fgv.-nek úgy,hogy mást definiálunk rajta?
-// Válasz: Igen, itt nem igaz a C-beni szabály, hogy mindegyik műveletnek más nevet kell adni, csak az argumentumnak kell másnak lennie és lehet ugyanaz a név.
-
-
-
-
 #include <iostream>
 #include <cmath>
 #include "vector.h"
