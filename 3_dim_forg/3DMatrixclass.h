@@ -147,7 +147,7 @@ public:
                 for (int j = 0; j < matrix.cols; j++)
                 {
                     result.pMatrix[i * result.cols + j] = 0;
-                    for (int k = 0; k < cols; i++)
+                    for (int k = 0; k < cols; k++)
                     {
                         result.pMatrix[i * result.cols + j] += pMatrix[i * cols + k] * matrix.pMatrix[k * matrix.cols + j];
                     }
