@@ -157,6 +157,8 @@ public:
         }
     }
 
+    
+
     friend istream& operator>> <> (istream& s, Matrix& matrix);
     friend ostream& operator<< <> (ostream& s, const Matrix& matrix);
 
