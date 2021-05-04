@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <cmath>
+#include<vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,6 +32,12 @@ class Matrix
 private:
     int rows,cols;
     T* pMatrix;
+    
+
+    T& at(int x, int y)
+    {
+        return pMatrix[x - 1 + rows*(y - 1)];
+    }
 
 public:
     Matrix(int Rows, int Cols)
@@ -65,6 +74,8 @@ public:
     {
         delete[] pMatrix;
     }
+
+    
 
     Matrix& operator= (const Matrix& matrix)
     {
@@ -157,6 +168,45 @@ public:
         }
     }
 
+    void rotx(double angle)
+    {
+        this->at(1,1) = 1;
+        this->at(1,2) = 0;
+        this->at(1,3) = 0;
+        this->at(2,1) = 0;
+        this->at(2,2) = cos(angle);
+        this->at(2,3) = -sin(angle);
+        this->at(3,1) = 0;
+        this->at(3,2) = sin(angle);
+        this->at(3,3) = cos(angle);
+    }
+
+    void roty(double angle)
+    {
+        this->at(1,1) = cos(angle);
+        this->at(1,2) = 0;
+        this->at(1,3) = sin(angle);
+        this->at(2,1) = 0;
+        this->at(2,2) = 1;
+        this->at(2,3) = 0;
+        this->at(3,1) = -sin(angle);
+        this->at(3,2) = 0;
+        this->at(3,3) = cos(angle);
+    }
+
+    void rotz(double angle)
+    {
+        this->at(1,1) = cos(angle);
+        this->at(1,2) = -sin(angle);
+        this->at(1,3) = 0;
+        this->at(2,1) = sin(angle);
+        this->at(2,2) = cos(angle);
+        this->at(2,3) = 0;
+        this->at(3,1) = 0;
+        this->at(3,2) = 0;
+        this->at(3,3) = 1;
+    }
+
     
 
     friend istream& operator>> <> (istream& s, Matrix& matrix);
@@ -218,3 +268,8 @@ ofstream& operator<< <> (ofstream& fs, const Matrix<T>& matrix)
     return fs;
 }
 
+//class Complex
+//{
+//private:
+//    float a, b, c, d;
+//}
