@@ -11,6 +11,7 @@ using namespace std;
 DOCUMENTATION
 
 Ez a mátrix osztály tud:
+                    - at fügvénnyel a mátrix egyes értékei meghívhatóak
                     - sorokat is oszlopokat beolvasni
                     - pointert használ a mátrix helyére mutatáshoz
                     - tetszőleges méretű mátrixxal tud dolgozni
@@ -22,7 +23,9 @@ Ez a mátrix osztály tud:
                     - kiír a terminálba
                     - beolvas .txt fájlból
                     - kiír .txt fájlba
-                    - 
+                    - rotx a x tengely körüli forgásmátrix van definiálva a konzolból bekért szöggel
+                    - roty a y tengely körüli forgásmátrix van definiálva a konzolból bekért szöggel
+                    - rotz a z tengely körüli forgásmátrix van definiálva a konzolból bekért szöggel
 */
 
 
