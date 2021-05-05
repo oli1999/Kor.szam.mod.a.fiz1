@@ -64,7 +64,7 @@ int main()
 
 
     W.rot_vec(x_angle_in_degree,u);
-
+    cout << "This is the rotation matrix around u vector: " << endl << W << endl;
 
 
 

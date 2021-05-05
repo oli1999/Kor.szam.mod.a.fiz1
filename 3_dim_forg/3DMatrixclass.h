@@ -32,17 +32,11 @@ Ez a mátrix osztály tud:
 template <class T>
 class Matrix
 {
-private:
+public:
+
     int rows,cols;
     T* pMatrix;
-    
 
-    T& at(int x, int y)
-    {
-        return pMatrix[x - 1 + rows*(y - 1)];
-    }
-
-public:
     Matrix(int Rows, int Cols)
     {
         rows = Rows;
@@ -171,6 +165,12 @@ public:
         }
     }
 
+    T& at(int x, int y)
+    {
+        return pMatrix[x - 1 + rows*(y - 1)];
+    }
+
+
     void rotx(double angle)
     {
         this->at(1,1) = 1;
@@ -213,15 +213,15 @@ public:
     
     void rot_vec(double angle , Matrix& u)
     {
-        this->at(1,1) = 1 + (1/2 + 1/2 * cos(angle)) * (-u(1,3)**2 -u(1,2)**2);
-        this->at(1,2) = -u(1,3)*sin(angle) + (1/2 + 1/2*cos(angle) * u(1,2)*u(1,3));
-        this->at(1,3) = u(1,2)*sin(angle) + (1/2 + 1/2*cos(angle) * u(1,3)*u(1,1));
-        this->at(2,1) = u(1,3)*sin(angle) + (1/2 + 1/2*cos(angle) * u(1,1)*u(1,2));
-        this->at(2,2) = 1 + (1/2 + 1/2 * cos(angle)) * (-u(1,3)**2 -u(1,1)**2);
-        this->at(2,3) = -u(1,1)*sin(angle) + (1/2 + 1/2*cos(angle) * u(1,3)*u(1,2));
-        this->at(3,1) = -u(1,2)*sin(angle) + (1/2 + 1/2*cos(angle) * u(1,1)*u(1,3));
-        this->at(3,2) = u(1,1)*sin(angle) + (1/2 + 1/2*cos(angle) * u(1,2)*u(1,3));
-        this->at(3,3) = 1 + (1/2 + 1/2 * cos(angle)) * (-u(1,2)**2 -u(1,1)**2);
+        this->at(1,1) = 1 + (1/2 + 1/2 * cos(angle)) * (-pow(u.at(1,3),2) -pow(u.at(1,2),2));
+        this->at(1,2) = -u.at(1,3) * sin(angle) + (1/2 + 1/2 * cos(angle) * u.at(1,2) * u.at(1,3));
+        this->at(1,3) = u.at(1,2) * sin(angle) + (1/2 + 1/2 * cos(angle) * u.at(1,3) * u.at(1,1));
+        this->at(2,1) = u.at(1,3) * sin(angle) + (1/2 + 1/2 * cos(angle) * u.at(1,1) * u.at(1,2));
+        this->at(2,2) = 1 + (1/2 + 1/2 * cos(angle)) * (-pow(u.at(1,3),2) -pow(u.at(1,1),2));
+        this->at(2,3) = -u.at(1,1) * sin(angle) + (1/2 + 1/2 * cos(angle) * u.at(1,3) * u.at(1,2));
+        this->at(3,1) = -u.at(1,2) * sin(angle) + (1/2 + 1/2 * cos(angle) * u.at(1,1) * u.at(1,3));
+        this->at(3,2) = u.at(1,1) * sin(angle) + (1/2 + 1/2 * cos(angle) * u.at(1,2) * u.at(1,3));
+        this->at(3,3) = 1 + (1/2 + 1/2 * cos(angle)) * (-pow(u.at(1,2),2) -pow(u.at(1,1),2));
     }
     
     
